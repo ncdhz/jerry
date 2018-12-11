@@ -313,9 +313,10 @@ class JerryAnnotationResolver implements AnnotationResolver {
             allPacket=new LinkedList<>();
             for (String packet : packetMapping) {
                 String packetR = packet.replace(".", "/");
-                String packetRA = File.separator + packetR;
+                String packetRA = "/" + packetR;
 
                 URL resource = getClass().getResource(packetRA);
+
                 if (resource==null)
                     throw new PacketMappingException();
 
@@ -343,7 +344,9 @@ class JerryAnnotationResolver implements AnnotationResolver {
             File file = new File(firstPacket);
             File[] files = file.listFiles();
             for (File f : files) {
+
                 String path = f.getPath();
+
                 if (f.isFile()&&path.endsWith(".class")){
                     allFilePath.add(getRelativePath(path));
                 }
