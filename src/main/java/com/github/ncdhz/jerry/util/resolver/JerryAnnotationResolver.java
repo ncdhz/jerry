@@ -329,6 +329,7 @@ class JerryAnnotationResolver implements AnnotationResolver {
                     throw new PacketMappingException();
 
                 String[] split = packetPath.split(packetR);
+
                 ClassPath = split[0];
 
                 allPacket.add(packetPath);
@@ -343,6 +344,7 @@ class JerryAnnotationResolver implements AnnotationResolver {
             String firstPacket = allPacket.removeFirst();
             File file = new File(firstPacket);
             File[] files = file.listFiles();
+
             for (File f : files) {
 
                 String path = f.getPath();
@@ -363,9 +365,11 @@ class JerryAnnotationResolver implements AnnotationResolver {
      * @return 可以让Class.forName操作的路径
      */
     private String getRelativePath(String path){
+
         String[] split = path.split("\\.");
         String[] split1 = split[0].split(ClassPath);
-        return split1[split1.length-1].replace(File.separator,".");
+
+        return split1[split1.length-1].replace("/",".");
     }
 
     /**
